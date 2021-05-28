@@ -4,6 +4,8 @@ Bloc/Cubit with provider example
 
 https://www.youtube.com/watch?v=_Zw6S2F0154
 
+https://terraideas.ru/app/bloc.apk
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
