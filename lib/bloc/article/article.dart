@@ -39,7 +39,7 @@ class ArticleBLoC extends Bloc<ArticleEvent, ArticleState> {
   Stream<ArticleState> _load(int id) async* {
     yield const ArticleState.loading();
     try {
-      final Article? model = await _articleRepository.fetch(id)
+      final model = await _articleRepository.fetch(id)
           .timeout(const Duration(seconds: 10));
       if (model != null) {
         yield ArticleState.loaded(model);

@@ -1,8 +1,8 @@
 import 'package:bloc_example/data/models/article.dart';
 import 'package:dio/dio.dart';
 
-typedef JsonResult = Map<String, dynamic>;
-typedef JsonListResult = List<dynamic>;
+typedef JsonResult = Map<String, Object?>;
+typedef JsonListResult = List<Object?>;
 
 class ApiProvider {
   ApiProvider(Dio client): _client = client;
@@ -11,7 +11,7 @@ class ApiProvider {
 
   // Запрос списка статей
   Future<Iterable<Article>?> fetchArticles(int page) async {
-    final Response<JsonListResult> response = await _client.get<JsonListResult>('/articles.json',
+    final response = await _client.get<JsonListResult>('/articles.json',
       queryParameters: <String, Object>{
         'page': page
       }
@@ -23,7 +23,7 @@ class ApiProvider {
 
   // Запрос полной статьи
   Future<Article?> fetchArticle(int id, String slug) async {
-    final Response<JsonResult> response = await _client.get<JsonResult>(
+    final response = await _client.get<JsonResult>(
         '/article/$slug-$id.json'
     );
 

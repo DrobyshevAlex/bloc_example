@@ -18,7 +18,7 @@ class ArticleRepository {
     // если данных нет или есть флаг loadMore
     if (loadMore || _cache.isEmpty) {
       // тащим статьи для нужной страницы
-      final Iterable<Article>? data = await _apiProvider.fetchArticles(_page);
+      final data = await _apiProvider.fetchArticles(_page);
       if (data?.isNotEmpty == true) {
         // если данные пришли, добавляем список в кеш/стор
         _cache = DataList<Article>.fromIterable(<Article>[
@@ -38,14 +38,14 @@ class ArticleRepository {
   Future<Article?> fetch(int id) async {
     try {
       // проверяем есть ли статья
-      final Article current = _cache.firstWhere((Article model) => model.id == id);
+      final current = _cache.firstWhere((Article model) => model.id == id);
       // если статья есть и контент уже заполнен - просто отдаем ее
       if (current.content != null) {
         return current;
       }
 
       // Если же контента нет, то загружаем тело статьи
-      final Article? model = await _apiProvider.fetchArticle(current.id, current.slug);
+      final model = await _apiProvider.fetchArticle(current.id, current.slug);
       if (model != null) {
         _cache = DataList<Article>.fromIterable(<Article>[
           ..._cache,
